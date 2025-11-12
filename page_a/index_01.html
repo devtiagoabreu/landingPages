@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento Exclusivo - Cadastre-se Agora</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    
+    <!-- Seu conteúdo do site aqui (mantenha igual) -->
+    
+    <!-- FORMULÁRIO SIMPLES E FUNCIONAL -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+            Cadastre-se para o Lançamento
+        </h2>
+        
+        <!-- FORMULÁRIO QUE REDIRECIONA DIRETAMENTE -->
+        <form 
+            action="https://docs.google.com/forms/d/e/1FAIpQLSe3mjBLJj90z77mjYBMRpZfWlC-gQuqJ8TUnBvGdV5Nm28IhQ/formResponse" 
+            method="POST"
+            target="_blank"
+            class="space-y-6"
+        >
+            <!-- Nome -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Nome Completo *
+                </label>
+                <input 
+                    type="text" 
+                    name="entry.633004380" 
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Seu nome completo"
+                >
+            </div>
+
+            <!-- Celular -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Celular *
+                </label>
+                <input 
+                    type="tel" 
+                    name="entry.1279638903"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="(11) 99999-9999"
+                >
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Email *
+                </label>
+                <input 
+                    type="email" 
+                    name="entry.825415367"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="seu@email.com"
+                >
+            </div>
+
+            <!-- Cidade -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Cidade *
+                </label>
+                <input 
+                    type="text" 
+                    name="entry.1909945442"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Sua cidade"
+                >
+            </div>
+
+            <!-- Empresa -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Empresa (se for B2B)
+                </label>
+                <input 
+                    type="text" 
+                    name="entry.1351631334"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nome da sua empresa"
+                >
+            </div>
+
+            <!-- Mensagem -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Mensagem *
+                </label>
+                <textarea 
+                    name="entry.411931879"
+                    required
+                    rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Conte-nos sobre seu interesse..."
+                ></textarea>
+            </div>
+
+            <button 
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-all"
+            >
+                <i class="fas fa-paper-plane mr-2"></i>
+                Quero Participar do Lançamento
+            </button>
+
+            <p class="text-xs text-gray-500 text-center">
+                Você será redirecionado para uma página de confirmação do Google
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Máscara simples para celular
+        document.querySelector('input[name="entry.1279638903"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html>
