@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento Exclusivo - Cadastre-se Agora</title>
+    <meta name="description" content="Participe do lançamento exclusivo do nosso produto. Cadastre-se para receber informações privilegiadas, ofertas especiais e ser notificado sobre o lançamento.">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXX');</script>
+    <!-- End Google Tag Manager -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        main {
+            padding-top: 80px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .carousel-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .carousel-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .modal-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: rotate(90deg);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #2563eb;
+            border-radius: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            display: flex;
+        }
+        
+        .back-to-top:hover {
+            background: #2563eb;
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top:hover i {
+            color: white;
+        }
+        
+        .font-small { font-size: 14px; }
+        .font-normal { font-size: 16px; }
+        .font-large { font-size: 18px; }
+        .font-xlarge { font-size: 20px; }
+        
+        .accessibility-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 2px;
+        }
+        
+        .accessibility-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1e40af;
+        }
+
+        /* Estilo para o botão de voz quando está ativo */
+        .voice-active {
+            background-color: #10b981 !important;
+        }
+
+        /* Video container styles */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-thumbnail {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .video-thumbnail:hover {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button i {
+            color: #2563eb;
+            font-size: 2rem;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-normal">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Header Fixo -->
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">P</span>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">ProdutoPro</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#sobre" class="text-gray-600 hover:text-primary transition-colors">Sobre</a>
+                    <a href="#beneficios" class="text-gray-600 hover:text-primary transition-colors">Benefícios</a>
+                    <a href="#formulario" class="text-gray-600 hover:text-primary transition-colors">Cadastro</a>
+                    
+                    <!-- Menu de Acessibilidade -->
+                    <div class="flex items-center space-x-2 ml-6 pl-6 border-l border-gray-300">
+                        <span class="text-sm text-gray-500 mr-2">Acessibilidade:</span>
+                        <button onclick="changeFontSize('small')" class="accessibility-btn bg-gray-200 hover:bg-gray-300" title="Diminuir fonte">
+                            <i class="fas fa-minus text-gray-700 text-xs"></i>
+                        </button>
+                        <button onclick="changeFontSize('normal')" class="accessibility-btn bg-primary text-white hover:bg-secondary" title="Fonte normal">
+                            <i class="fas fa-font text-xs"></i>
+                        </button>
+                        <button onclick="changeFontSize('large')" class="accessibility-btn bg-gray-200 hover:bg-gray-300" title="Aumentar fonte">
+                            <i class="fas fa-plus text-gray-700 text-xs"></i>
+                        </button>
+                        <button onclick="toggleReadAloud()" class="accessibility-btn bg-accent text-white hover:bg-yellow-600 voice-btn" title="Ouvir conteúdo" id="voiceButton">
+                            <i class="fas fa-volume-up text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up text-primary text-lg"></i>
+    </button>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Carrossel de Imagens - LARGURA TOTAL - AGORA NO TOPO -->
+        <section class="bg-white">
+            <div class="w-full">
+                <div class="carousel-container w-full mx-auto">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide">
+                            <img 
+                                src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Design moderno do produto"
+                                class="carousel-image"
+                                onclick="openModal(this.src, this.alt)"
+                            >
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                                <h3 class="text-white text-2xl font-bold mb-2">Design Moderno</h3>
+                                <p class="text-white/90">Acabamento premium e design ergonômico</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide">
+                            <img 
+                                src="https://images.unsplash.com/photo-1560769624-7a8f7c3b9c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Alta performance do produto"
+                                class="carousel-image"
+                                onclick="openModal(this.src, this.alt)"
+                            >
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                                <h3 class="text-white text-2xl font-bold mb-2">Alta Performance</h3>
+                                <p class="text-white/90">Tecnologia de ponta para resultados excepcionais</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide">
+                            <img 
+                                src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Tecnologia avançada do produto"
+                                class="carousel-image"
+                                onclick="openModal(this.src, this.alt)"
+                            >
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                                <h3 class="text-white text-2xl font-bold mb-2">Tecnologia Avançada</h3>
+                                <p class="text-white/90">Solução inovadora que revoluciona o mercado</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Controles do Carrossel -->
+                    <button onclick="prevSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:scale-110 transition-all" aria-label="Slide anterior">
+                        <i class="fas fa-chevron-left text-gray-700 text-xl" aria-hidden="true"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:scale-110 transition-all" aria-label="Próximo slide">
+                        <i class="fas fa-chevron-right text-gray-700 text-xl" aria-hidden="true"></i>
+                    </button>
+                    
+                    <!-- Indicadores -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+                        <button onclick="goToSlide(0)" class="w-3 h-3 bg-white rounded-full carousel-indicator active" aria-label="Ir para slide 1"></button>
+                        <button onclick="goToSlide(1)" class="w-3 h-3 bg-white/50 rounded-full carousel-indicator" aria-label="Ir para slide 2"></button>
+                        <button onclick="goToSlide(2)" class="w-3 h-3 bg-white/50 rounded-full carousel-indicator" aria-label="Ir para slide 3"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal para Imagem Ampliada -->
+        <div id="imageModal" class="image-modal">
+            <button class="close-btn" onclick="closeModal()" aria-label="Fechar imagem">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" src="" alt="" class="modal-image">
+        </div>
+
+        <!-- Seção Superior com Texto - AGORA ABAIXO DO CARROSSEL -->
+        <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    Lançamento Exclusivo em Breve
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
+                    Seja um dos primeiros a conhecer nossa solução inovadora. Cadastre-se para receber informações privilegiadas, ofertas especiais e ser notificado sobre o lançamento.
+                </p>
+                <div class="flex justify-center space-x-8 flex-wrap gap-4">
+                    <div class="flex items-center text-green-300">
+                        <i class="fas fa-check-circle mr-3 text-2xl"></i>
+                        <span class="text-lg font-semibold">Primeiro acesso</span>
+                    </div>
+                    <div class="flex items-center text-green-300">
+                        <i class="fas fa-check-circle mr-3 text-2xl"></i>
+                        <span class="text-lg font-semibold">Condições especiais</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção do Formulário COM AJUSTE DE ALINHAMENTO -->
+        <section id="formulario" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"> <!-- Alterado de items-center para items-start -->
+                    <!-- Left Content - AGORA ALINHADO AO TOPO -->
+                    <div class="pt-0"> <!-- Removido padding-top para alinhar ao topo -->
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                            Não Fique de Fora Desta Oportunidade
+                        </h2>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Garanta seu lugar entre os primeiros a experimentar nossa solução revolucionária. 
+                            Cadastre-se agora e receba benefícios exclusivos.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-check-circle mr-3 text-xl"></i>
+                                <span class="text-lg">Acesso antecipado ao produto</span>
+                            </div>
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-check-circle mr-3 text-xl"></i>
+                                <span class="text-lg">Descontos especiais de lançamento</span>
+                            </div>
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-check-circle mr-3 text-xl"></i>
+                                <span class="text-lg">Suporte prioritário</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Content - Form -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+                            Cadastre-se para o Lançamento
+                        </h3>
+                        
+                        <form id="leadForm" class="space-y-6">
+                            <!-- Campo honeypot para spam -->
+                            <input type="text" name="website" style="display: none;" tabindex="-1" autocomplete="off">
+                            
+                            <!-- Nome -->
+                            <div>
+                                <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Nome Completo *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="nome" 
+                                    name="nome"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="Seu nome completo"
+                                >
+                            </div>
+
+                            <!-- Celular -->
+                            <div>
+                                <label for="celular" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Celular *
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="celular" 
+                                    name="celular"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="(11) 99999-9999"
+                                >
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email *
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="seu@email.com"
+                                >
+                            </div>
+
+                            <!-- Cidade -->
+                            <div>
+                                <label for="cidade" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Cidade *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="cidade" 
+                                    name="cidade"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="Sua cidade"
+                                >
+                            </div>
+
+                            <!-- Empresa (B2B) -->
+                            <div>
+                                <label for="empresa" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Empresa (se for B2B)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="empresa" 
+                                    name="empresa"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="Nome da sua empresa"
+                                >
+                            </div>
+
+                            <!-- Mensagem -->
+                            <div>
+                                <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Mensagem *
+                                </label>
+                                <textarea 
+                                    id="mensagem" 
+                                    name="mensagem"
+                                    required
+                                    rows="4"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-vertical"
+                                    placeholder="Conte-nos sobre seu interesse no produto, suas necessidades ou qualquer informação relevante..."
+                                ></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button 
+                                type="submit"
+                                class="w-full bg-primary hover:bg-secondary text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:ring-4 focus:ring-primary focus:ring-opacity-50"
+                                id="submitButton"
+                            >
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Quero Participar do Lançamento
+                            </button>
+
+                            <p class="text-xs text-gray-500 text-center">
+                                Ao cadastrar, você concorda em receber comunicações sobre o lançamento.
+                            </p>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="successMessage" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+                                <div>
+                                    <h3 class="font-semibold text-green-800">Cadastro realizado com sucesso!</h3>
+                                    <p class="text-green-700 text-sm mt-1">Em breve entraremos em contato com mais informações.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="errorMessage" class="hidden mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fas fa-exclamation-circle text-red-500 mr-3 text-xl"></i>
+                                <div>
+                                    <h3 class="font-semibold text-red-800">Erro no cadastro</h3>
+                                    <p class="text-red-700 text-sm mt-1" id="errorText">Por favor, tente novamente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Benefícios -->
+        <section id="beneficios" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Por Que Participar do Lançamento?
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Descubra os benefícios exclusivos para os primeiros cadastrados
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="text-center p-6">
+                        <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-gem text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Acesso Prioritário</h3>
+                        <p class="text-gray-600">Seja um dos primeiros a testar e adquirir o produto com condições especiais.</p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-16 h-16 bg-accent bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-percentage text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Condições Exclusivas</h3>
+                        <p class="text-gray-600">Descontos e benefícios disponíveis apenas para cadastrados no pré-lançamento.</p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-16 h-16 bg-green-500 bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-headset text-green-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Suporte Dedicado</h3>
+                        <p class="text-gray-600">Atendimento personalizado durante todo o processo de implementação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre com Vídeo -->
+        <section id="sobre" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                            Sobre o ProdutoPro
+                        </h2>
+                        <p class="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
+                            Uma solução inovadora desenvolvida para revolucionar o mercado, 
+                            oferecendo eficiência, praticidade e resultados excepcionais para 
+                            empresas e profissionais.
+                        </p>
+                    </div>
+
+                    <!-- Vídeo -->
+                    <div class="mb-16">
+                        <div class="video-thumbnail relative max-w-4xl mx-auto" onclick="openVideo()" id="videoThumbnail">
+                            <img 
+                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Vídeo demonstrativo do ProdutoPro"
+                                class="w-full h-64 md:h-96 object-cover"
+                            >
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div id="videoPlayer" class="video-container hidden max-w-4xl mx-auto">
+                            <iframe 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                title="Vídeo demonstrativo do ProdutoPro" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-rocket text-primary text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Inovação</h3>
+                            <p class="text-gray-600">Tecnologia de ponta para resultados surpreendentes.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-accent bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shield-alt text-accent text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Confiabilidade</h3>
+                            <p class="text-gray-600">Solução segura e estável para seu negócio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra de Redes Sociais - PARTE INFERIOR HORIZONTAL -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40">
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-3">
+            <div class="flex space-x-3">
+                <a href="#" class="group relative">
+                    <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-green-600 shadow-md">
+                        <i class="fab fa-whatsapp text-white text-lg"></i>
+                    </div>
+                    <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                        WhatsApp
+                    </span>
+                </a>
+                
+                <a href="#" class="group relative">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md">
+                        <i class="fab fa-instagram text-white text-lg"></i>
+                    </div>
+                    <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                        Instagram
+                    </span>
+                </a>
+                
+                <a href="#" class="group relative">
+                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-700 shadow-md">
+                        <i class="fab fa-facebook-f text-white text-lg"></i>
+                    </div>
+                    <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                        Facebook
+                    </span>
+                </a>
+                
+                <a href="#" class="group relative">
+                    <div class="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md">
+                        <i class="fab fa-tiktok text-white text-lg"></i>
+                    </div>
+                    <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                        TikTok
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary font-bold text-lg">P</span>
+                        </div>
+                        <span class="text-xl font-bold">ProdutoPro</span>
+                    </div>
+                    <p class="text-gray-400 max-w-md">
+                        Soluções inovadoras para empresas e consumidores. Estamos lançando em breve uma ferramenta que vai revolucionar o mercado.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fas fa-envelope mr-2"></i>contato@produtopro.com</p>
+                        <p><i class="fas fa-phone mr-2"></i>(11) 9999-9999</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 ProdutoPro. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Formulário invisível para Google Forms -->
+    <form id="hiddenForm" 
+          action="https://docs.google.com/forms/d/e/1FAIpQLSe3mjBLJj90z77mjYBMRpZfWlC-gQuqJ8TUnBvGdV5Nm28IhQ/formResponse" 
+          method="POST" 
+          target="hiddenIframe"
+          style="display: none;">
+        <input type="text" name="entry.633004380" id="hiddenNome">
+        <input type="text" name="entry.1279638903" id="hiddenCelular">
+        <input type="text" name="entry.825415367" id="hiddenEmail">
+        <input type="text" name="entry.1909945442" id="hiddenCidade">
+        <input type="text" name="entry.1351631334" id="hiddenEmpresa">
+        <input type="text" name="entry.411931879" id="hiddenMensagem">
+        <input type="text" name="entry.1085065584" id="hiddenPrompt">
+    </form>
+    <iframe name="hiddenIframe" style="display: none;"></iframe>
+
+    <!-- Status para screen readers -->
+    <div id="formStatus" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+        // Variável global para armazenar o conteúdo do prompt
+        let promptContent = '';
+        let isReading = false;
+        let speech = null;
+
+        // ===== FUNÇÃO DE VOZ COM PAUSA =====
+        function toggleReadAloud() {
+            const voiceButton = document.getElementById('voiceButton');
+            
+            if (!isReading) {
+                // Iniciar leitura
+                startReading();
+                voiceButton.classList.add('voice-active');
+                voiceButton.innerHTML = '<i class="fas fa-pause text-xs"></i>';
+                voiceButton.title = 'Pausar leitura';
+            } else {
+                // Parar leitura
+                stopReading();
+                voiceButton.classList.remove('voice-active');
+                voiceButton.innerHTML = '<i class="fas fa-volume-up text-xs"></i>';
+                voiceButton.title = 'Ouvir conteúdo';
+            }
+            
+            isReading = !isReading;
+        }
+
+        function startReading() {
+            const textToRead = `
+                Lançamento Exclusivo em Breve.
+                Seja um dos primeiros a conhecer nossa solução inovadora. 
+                Cadastre-se para receber informações privilegiadas, ofertas especiais 
+                e ser notificado sobre o lançamento.
+                Benefícios: Primeiro acesso e Condições especiais.
+                
+                Conheça Nosso Produto: Design Moderno, Alta Performance, Tecnologia Avançada.
+                
+                Não Fique de Fora Desta Oportunidade.
+                Garanta seu lugar entre os primeiros a experimentar nossa solução revolucionária.
+                Benefícios: Acesso antecipado ao produto, Descontos especiais de lançamento, Suporte prioritário.
+                
+                Por Que Participar do Lançamento?
+                Acesso Prioritário: Seja um dos primeiros a testar e adquirir o produto com condições especiais.
+                Condições Exclusivas: Descontos e benefícios disponíveis apenas para cadastrados no pré-lançamento.
+                Suporte Dedicado: Atendimento personalizado durante todo o processo de implementação.
+                
+                Sobre o ProdutoPro: Uma solução inovadora desenvolvida para revolucionar o mercado.
+            `;
+
+            if ('speechSynthesis' in window) {
+                speech = new SpeechSynthesisUtterance();
+                speech.text = textToRead;
+                speech.lang = 'pt-BR';
+                speech.rate = 1;
+                speech.pitch = 1;
+                speech.volume = 1;
+                
+                speech.onend = function() {
+                    isReading = false;
+                    const voiceButton = document.getElementById('voiceButton');
+                    voiceButton.classList.remove('voice-active');
+                    voiceButton.innerHTML = '<i class="fas fa-volume-up text-xs"></i>';
+                    voiceButton.title = 'Ouvir conteúdo';
+                };
+                
+                window.speechSynthesis.speak(speech);
+            } else {
+                alert('Seu navegador não suporta síntese de voz. Tente usar Chrome, Edge ou Safari.');
+                isReading = false;
+            }
+        }
+
+        function stopReading() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        // ===== FUNÇÃO DO VÍDEO =====
+        function openVideo() {
+            const thumbnail = document.getElementById('videoThumbnail');
+            const player = document.getElementById('videoPlayer');
+            
+            thumbnail.classList.add('hidden');
+            player.classList.remove('hidden');
+        }
+
+        // ===== CARREGAR PROMPT.TXT =====
+        async function loadPrompt() {
+            try {
+                const response = await fetch('prompt.txt');
+                if (!response.ok) {
+                    throw new Error('Arquivo prompt.txt não encontrado');
+                }
+                promptContent = await response.text();
+                console.log('Prompt carregado com sucesso');
+            } catch (error) {
+                console.error('Erro ao carregar prompt.txt:', error);
+                promptContent = 'Prompt não carregado - ' + error.message;
+            }
+        }
+
+        // ===== CARROSSEL =====
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const track = document.getElementById('carouselTrack');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        let carouselInterval;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('bg-white');
+                    indicator.classList.remove('bg-white/50');
+                } else {
+                    indicator.classList.remove('bg-white');
+                    indicator.classList.add('bg-white/50');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function startCarousel() {
+            carouselInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopCarousel() {
+            clearInterval(carouselInterval);
+        }
+
+        // ===== MODAL =====
+        function openModal(src, alt) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modalImage.src = src;
+            modalImage.alt = alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            stopCarousel();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            startCarousel();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ===== ACESSIBILIDADE =====
+        function changeFontSize(size) {
+            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
+            document.body.classList.add(`font-${size}`);
+        }
+
+        // ===== BOTÃO VOLTAR AO TOPO =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== VALIDAÇÕES =====
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            return cleaned.length === 11;
+        }
+
+        // ===== FORMULÁRIO =====
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = document.getElementById('submitButton');
+            const originalText = submitButton.innerHTML;
+            const formStatus = document.getElementById('formStatus');
+            
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('errorMessage').classList.add('hidden');
+            
+            // Proteção contra spam
+            if (document.querySelector('input[name="website"]').value) {
+                console.log('Spam detectado');
+                return;
+            }
+            
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Cadastrando...';
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-75', 'cursor-not-allowed', 'loading');
+
+            const formData = {
+                nome: document.getElementById('nome').value.trim(),
+                celular: document.getElementById('celular').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                cidade: document.getElementById('cidade').value.trim(),
+                empresa: document.getElementById('empresa').value.trim(),
+                mensagem: document.getElementById('mensagem').value.trim()
+            };
+
+            // Validações
+            if (!formData.nome || !formData.celular || !formData.email || !formData.cidade || !formData.mensagem) {
+                showError('Por favor, preencha todos os campos obrigatórios.');
+                resetButton(submitButton, originalText);
+                return;
+            }
+
+            if (!validateEmail(formData.email)) {
+                showError('Por favor, insira um email válido.');
+                resetButton(submitButton, originalText);
+                return;
+            }
+
+            if (!validatePhone(formData.celular)) {
+                showError('Por favor, insira um número de celular válido com DDD.');
+                resetButton(submitButton, originalText);
+                return;
+            }
+
+            // Se o prompt ainda não foi carregado, tenta carregar agora
+            if (!promptContent) {
+                try {
+                    await loadPrompt();
+                } catch (error) {
+                    console.error('Erro ao carregar prompt:', error);
+                }
+            }
+
+            // Preencher formulário oculto do Google
+            document.getElementById('hiddenNome').value = formData.nome;
+            document.getElementById('hiddenCelular').value = formData.celular;
+            document.getElementById('hiddenEmail').value = formData.email;
+            document.getElementById('hiddenCidade').value = formData.cidade;
+            document.getElementById('hiddenEmpresa').value = formData.empresa;
+            document.getElementById('hiddenMensagem').value = formData.mensagem;
+            document.getElementById('hiddenPrompt').value = promptContent;
+
+            // Enviar formulário
+            try {
+                document.getElementById('hiddenForm').submit();
+                
+                // Sucesso
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    document.getElementById('leadForm').reset();
+                    resetButton(submitButton, originalText);
+                    
+                    formStatus.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+                    
+                    document.getElementById('successMessage').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Erro ao enviar formulário:', error);
+                // Mesmo com erro, mostra sucesso para o usuário
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('leadForm').reset();
+                resetButton(submitButton, originalText);
+            }
+        });
+
+        function showError(message) {
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMessage').classList.remove('hidden');
+            document.getElementById('formStatus').textContent = message;
+            
+            document.getElementById('errorMessage').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+
+        function resetButton(button, originalText) {
+            button.innerHTML = originalText;
+            button.disabled = false;
+            button.classList.remove('opacity-75', 'cursor-not-allowed', 'loading');
+        }
+
+        // Máscara para celular
+        document.getElementById('celular').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                e.target.value = value;
+            }
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPrompt();
+            startCarousel();
+
+            const carouselContainer = document.querySelector('.carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', stopCarousel);
+                carouselContainer.addEventListener('mouseleave', startCarousel);
+            }
+        });
+
+        // Smooth scroll para links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
