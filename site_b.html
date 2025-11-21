@@ -4,8 +4,8 @@
     <base target="_self">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lançamento Exclusivo - Cadastre-se Agora</title>
-    <meta name="description" content="Participe do lançamento exclusivo do nosso produto. Cadastre-se para receber informações privilegiadas, ofertas especiais e ser notificado sobre o lançamento.">
+    <title>Dashboard Têxtil - Monitoramento Inteligente para Teares Toyota</title>
+    <meta name="description" content="Solução completa de captura e análise de dados para teares Toyota. Aumente a eficiência da sua produção têxtil com monitoramento em tempo real e Business Intelligence.">
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -283,6 +283,56 @@
             font-size: 2rem;
             margin-left: 5px;
         }
+
+        .dashboard-preview {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .dashboard-preview:hover {
+            transform: perspective(1000px) rotateX(0) rotateY(0);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: #2563eb;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-normal">
@@ -297,15 +347,16 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">P</span>
+                        <i class="fas fa-industry text-white"></i>
                     </div>
-                    <span class="text-xl font-bold text-gray-800">ProdutoPro</span>
+                    <span class="text-xl font-bold text-gray-800">Dashboard<span class="text-primary">Têxtil</span></span>
                 </div>
                 
                 <div class="hidden md:flex space-x-6 items-center">
-                    <a href="#sobre" class="text-gray-600 hover:text-primary transition-colors">Sobre</a>
+                    <a href="#solucao" class="text-gray-600 hover:text-primary transition-colors">Solução</a>
+                    <a href="#funcionalidades" class="text-gray-600 hover:text-primary transition-colors">Funcionalidades</a>
                     <a href="#beneficios" class="text-gray-600 hover:text-primary transition-colors">Benefícios</a>
-                    <a href="#formulario" class="text-gray-600 hover:text-primary transition-colors">Cadastro</a>
+                    <a href="#contato" class="text-gray-600 hover:text-primary transition-colors">Contato</a>
                     
                     <!-- Menu de Acessibilidade -->
                     <div class="flex items-center space-x-2 ml-6 pl-6 border-l border-gray-300">
@@ -339,7 +390,7 @@
 
     <!-- Conteúdo Principal -->
     <main>
-        <!-- Carrossel de Imagens - LARGURA TOTAL - AGORA NO TOPO -->
+        <!-- Carrossel de Imagens - LARGURA TOTAL -->
         <section class="bg-white">
             <div class="w-full">
                 <div class="carousel-container w-full mx-auto">
@@ -347,42 +398,42 @@
                         <!-- Slide 1 -->
                         <div class="carousel-slide">
                             <img 
-                                src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Design moderno do produto"
+                                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Monitoramento de teares Toyota em tempo real"
                                 class="carousel-image"
                                 onclick="openModal(this.src, this.alt)"
                             >
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                                <h3 class="text-white text-2xl font-bold mb-2">Design Moderno</h3>
-                                <p class="text-white/90">Acabamento premium e design ergonômico</p>
+                                <h3 class="text-white text-2xl font-bold mb-2">Monitoramento em Tempo Real</h3>
+                                <p class="text-white/90">Acompanhe RPM, eficiência e status de todos os teares simultaneamente</p>
                             </div>
                         </div>
                         
                         <!-- Slide 2 -->
                         <div class="carousel-slide">
                             <img 
-                                src="https://images.unsplash.com/photo-1560769624-7a8f7c3b9c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Alta performance do produto"
+                                src="https://images.unsplash.com/photo-1581094794358-89d0c55d4635?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Dashboard de Business Intelligence para produção têxtil"
                                 class="carousel-image"
                                 onclick="openModal(this.src, this.alt)"
                             >
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                                <h3 class="text-white text-2xl font-bold mb-2">Alta Performance</h3>
-                                <p class="text-white/90">Tecnologia de ponta para resultados excepcionais</p>
+                                <h3 class="text-white text-2xl font-bold mb-2">Business Intelligence</h3>
+                                <p class="text-white/90">Dashboards interativos para tomada de decisão estratégica</p>
                             </div>
                         </div>
                         
                         <!-- Slide 3 -->
                         <div class="carousel-slide">
                             <img 
-                                src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Tecnologia avançada do produto"
+                                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                                alt="Integração nativa com sistema TMS Toyota"
                                 class="carousel-image"
                                 onclick="openModal(this.src, this.alt)"
                             >
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                                <h3 class="text-white text-2xl font-bold mb-2">Tecnologia Avançada</h3>
-                                <p class="text-white/90">Solução inovadora que revoluciona o mercado</p>
+                                <h3 class="text-white text-2xl font-bold mb-2">Integração Nativa</h3>
+                                <p class="text-white/90">Captura automática de dados sem necessidade de hardware adicional</p>
                             </div>
                         </div>
                     </div>
@@ -413,61 +464,278 @@
             <img id="modalImage" src="" alt="" class="modal-image">
         </div>
 
-        <!-- Seção Superior com Texto - AGORA ABAIXO DO CARROSSEL -->
+        <!-- Seção Superior com Texto -->
         <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
             <div class="container mx-auto px-4 text-center">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                    Lançamento Exclusivo em Breve
+                    Monitoramento Inteligente para <span class="text-accent">Teares Toyota</span>
                 </h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-                    Seja um dos primeiros a conhecer nossa solução inovadora. Cadastre-se para receber informações privilegiadas, ofertas especiais e ser notificado sobre o lançamento.
+                    Solução completa de captura e análise de dados em tempo real. Aumente a eficiência da sua produção têxtil com Business Intelligence especializado.
                 </p>
                 <div class="flex justify-center space-x-8 flex-wrap gap-4">
                     <div class="flex items-center text-green-300">
                         <i class="fas fa-check-circle mr-3 text-2xl"></i>
-                        <span class="text-lg font-semibold">Primeiro acesso</span>
+                        <span class="text-lg font-semibold">Integração Nativa TMS Toyota</span>
                     </div>
                     <div class="flex items-center text-green-300">
                         <i class="fas fa-check-circle mr-3 text-2xl"></i>
-                        <span class="text-lg font-semibold">Condições especiais</span>
+                        <span class="text-lg font-semibold">Sem Hardware Adicional</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seção do Formulário COM AJUSTE DE ALINHAMENTO -->
-        <section id="formulario" class="py-16 bg-gray-50">
+        <!-- Seção Stats -->
+        <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"> <!-- Alterado de items-center para items-start -->
-                    <!-- Left Content - AGORA ALINHADO AO TOPO -->
-                    <div class="pt-0"> <!-- Removido padding-top para alinhar ao topo -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">+30%</div>
+                        <div class="text-gray-600">Aumento de Eficiência</div>
+                    </div>
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">-25%</div>
+                        <div class="text-gray-600">Redução de Paradas</div>
+                    </div>
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">99.9%</div>
+                        <div class="text-gray-600">Disponibilidade do Sistema</div>
+                    </div>
+                    <div class="stat-card p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">0</div>
+                        <div class="text-gray-600">Hardware Adicional</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Solução -->
+        <section id="solucao" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <!-- Left Content -->
+                    <div class="pt-0">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            Não Fique de Fora Desta Oportunidade
+                            Sistema de Monitoramento e B.I - <span class="text-primary">Smart Analytics</span>
                         </h2>
                         <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                            Garanta seu lugar entre os primeiros a experimentar nossa solução revolucionária. 
-                            Cadastre-se agora e receba benefícios exclusivos.
+                            Nossa solução captura dados diretamente dos teares Toyota através de integração nativa com o sistema TMS, 
+                            sem necessidade de hardware adicional. Transforme dados brutos em insights acionáveis para otimizar sua produção.
                         </p>
                         <div class="space-y-4">
                             <div class="flex items-center text-green-600">
                                 <i class="fas fa-check-circle mr-3 text-xl"></i>
-                                <span class="text-lg">Acesso antecipado ao produto</span>
+                                <span class="text-lg">Integração nativa com TMS Toyota</span>
                             </div>
                             <div class="flex items-center text-green-600">
                                 <i class="fas fa-check-circle mr-3 text-xl"></i>
-                                <span class="text-lg">Descontos especiais de lançamento</span>
+                                <span class="text-lg">Captura automática sem hardware adicional</span>
                             </div>
                             <div class="flex items-center text-green-600">
                                 <i class="fas fa-check-circle mr-3 text-xl"></i>
-                                <span class="text-lg">Suporte prioritário</span>
+                                <span class="text-lg">Dashboards em tempo real multi-dispositivo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Content - Dashboard Preview -->
+                    <div class="dashboard-preview p-2 bg-gray-800 rounded-lg">
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="text-white font-semibold">Painel de Controle - Teares Toyota</div>
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-800 rounded p-4 mb-4">
+                                <div class="grid grid-cols-3 gap-4 text-center text-white mb-4">
+                                    <div class="bg-gray-700 rounded p-2">
+                                        <div class="text-sm text-gray-300">RPM Médio</div>
+                                        <div class="text-xl font-bold text-green-400">645</div>
+                                    </div>
+                                    <div class="bg-gray-700 rounded p-2">
+                                        <div class="text-sm text-gray-300">Eficiência</div>
+                                        <div class="text-xl font-bold text-yellow-400">79%</div>
+                                    </div>
+                                    <div class="bg-gray-700 rounded p-2">
+                                        <div class="text-sm text-gray-300">Metros/Dia</div>
+                                        <div class="text-xl font-bold text-blue-400">12.024</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-700 rounded p-3">
+                                    <div class="text-white text-sm font-semibold mb-2">Status dos Teares</div>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300">Tear 00001</span>
+                                            <span class="text-green-400 flex items-center">
+                                                <i class="fas fa-circle text-xs mr-1"></i> 94.8%
+                                            </span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300">Tear 00002</span>
+                                            <span class="text-green-400 flex items-center">
+                                                <i class="fas fa-circle text-xs mr-1"></i> 87.9%
+                                            </span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300">Tear 00003</span>
+                                            <span class="text-yellow-400 flex items-center">
+                                                <i class="fas fa-circle text-xs mr-1"></i> 69.4%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Funcionalidades -->
+        <section id="funcionalidades" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Funcionalidades Principais
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Tudo que você precisa para monitorar e otimizar sua produção têxtil
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="feature-card text-center p-6">
+                        <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tachometer-alt text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Monitoramento Tempo Real</h3>
+                        <p class="text-gray-600">Acompanhe RPM, eficiência, status e produção de todos os teares simultaneamente.</p>
+                    </div>
+
+                    <div class="feature-card text-center p-6">
+                        <div class="w-16 h-16 bg-accent bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Business Intelligence</h3>
+                        <p class="text-gray-600">Dashboards interativos para análise de eficiência e tomada de decisão.</p>
+                    </div>
+
+                    <div class="feature-card text-center p-6">
+                        <div class="w-16 h-16 bg-green-500 bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-mobile-alt text-green-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Acesso Multi-Dispositivo</h3>
+                        <p class="text-gray-600">Painéis responsivos para computadores, TVs e smartphones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Benefícios -->
+        <section id="beneficios" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Benefícios Tangíveis
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Resultados mensuráveis que impactam diretamente no seu faturamento
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-bar text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">+15-30% Eficiência</h3>
+                        <p class="text-gray-600 text-sm">Identificação e correção de gargalos em tempo real</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">-20-40% Paradas</h3>
+                        <p class="text-gray-600 text-sm">Alertas proativos e análise de causas raiz</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-search-dollar text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Otimização de Custos</h3>
+                        <p class="text-gray-600 text-sm">Melhor aproveitamento de recursos e matéria-prima</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bullseye text-yellow-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Decisão Baseada em Dados</h3>
+                        <p class="text-gray-600 text-sm">Insights para decisões estratégicas mais assertivas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção do Formulário -->
+        <section id="contato" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <!-- Left Content -->
+                    <div class="pt-0">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                            Não Fique de Fora Desta Oportunidade
+                        </h2>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Solicite uma demonstração gratuita e descubra como nossa solução pode aumentar 
+                            a eficiência da sua operação em até 30%. Transforme dados de produção em resultados tangíveis.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-check-circle mr-3 text-xl"></i>
+                                <span class="text-lg">Demonstração personalizada</span>
+                            </div>
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-check-circle mr-3 text-xl"></i>
+                                <span class="text-lg">Proposta comercial sem compromisso</span>
+                            </div>
+                            <div class="flex items-center text-green-600">
+                                <i class="fas fa-check-circle mr-3 text-xl"></i>
+                                <span class="text-lg">Implementação e treinamento incluídos</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-6 bg-gray-50 rounded-2xl">
+                            <h4 class="font-bold text-gray-900 mb-3">Informações de Contato</h4>
+                            <div class="space-y-2 text-gray-600">
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope mr-3 text-primary"></i>
+                                    <span>hello@dashboardtextil.com.br</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone mr-3 text-primary"></i>
+                                    <span>(19) 9 9455-9836</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-tie mr-3 text-primary"></i>
+                                    <span>Tiago de Abreu - CTO Dashboard Têxtil</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Right Content - Form -->
-                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
                         <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">
-                            Cadastre-se para o Lançamento
+                            Solicitar Demonstração
                         </h3>
                         
                         <form id="leadForm" class="space-y-6">
@@ -486,6 +754,21 @@
                                     required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                                     placeholder="Seu nome completo"
+                                >
+                            </div>
+
+                            <!-- Empresa -->
+                            <div>
+                                <label for="empresa" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Empresa *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="empresa" 
+                                    name="empresa"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    placeholder="Nome da sua empresa"
                                 >
                             </div>
 
@@ -519,33 +802,24 @@
                                 >
                             </div>
 
-                            <!-- Cidade -->
+                            <!-- Quantidade de Teares -->
                             <div>
-                                <label for="cidade" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Cidade *
+                                <label for="teares" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Quantidade de Teares Toyota *
                                 </label>
-                                <input 
-                                    type="text" 
-                                    id="cidade" 
-                                    name="cidade"
+                                <select 
+                                    id="teares" 
+                                    name="teares"
                                     required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                                    placeholder="Sua cidade"
                                 >
-                            </div>
-
-                            <!-- Empresa (B2B) -->
-                            <div>
-                                <label for="empresa" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Empresa (se for B2B)
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="empresa" 
-                                    name="empresa"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                                    placeholder="Nome da sua empresa"
-                                >
+                                    <option value="">Selecione...</option>
+                                    <option value="1-5">1-5 teares</option>
+                                    <option value="6-15">6-15 teares</option>
+                                    <option value="16-30">16-30 teares</option>
+                                    <option value="31-50">31-50 teares</option>
+                                    <option value="51+">Mais de 50 teares</option>
+                                </select>
                             </div>
 
                             <!-- Mensagem -->
@@ -559,7 +833,7 @@
                                     required
                                     rows="4"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-vertical"
-                                    placeholder="Conte-nos sobre seu interesse no produto, suas necessidades ou qualquer informação relevante..."
+                                    placeholder="Conte-nos sobre seus objetivos e desafios na produção..."
                                 ></textarea>
                             </div>
 
@@ -569,12 +843,12 @@
                                 class="w-full bg-primary hover:bg-secondary text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:ring-4 focus:ring-primary focus:ring-opacity-50"
                                 id="submitButton"
                             >
-                                <i class="fas fa-paper-plane mr-2"></i>
-                                Quero Participar do Lançamento
+                                <i class="fas fa-calendar-check mr-2"></i>
+                                Solicitar Demonstração
                             </button>
 
                             <p class="text-xs text-gray-500 text-center">
-                                Ao cadastrar, você concorda em receber comunicações sobre o lançamento.
+                                Ao cadastrar, você concorda em receber comunicações sobre nossa solução.
                             </p>
                         </form>
 
@@ -583,8 +857,8 @@
                             <div class="flex items-center">
                                 <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
                                 <div>
-                                    <h3 class="font-semibold text-green-800">Cadastro realizado com sucesso!</h3>
-                                    <p class="text-green-700 text-sm mt-1">Em breve entraremos em contato com mais informações.</p>
+                                    <h3 class="font-semibold text-green-800">Solicitação enviada com sucesso!</h3>
+                                    <p class="text-green-700 text-sm mt-1">Em breve entraremos em contato para agendar a demonstração.</p>
                                 </div>
                             </div>
                         </div>
@@ -594,7 +868,7 @@
                             <div class="flex items-center">
                                 <i class="fas fa-exclamation-circle text-red-500 mr-3 text-xl"></i>
                                 <div>
-                                    <h3 class="font-semibold text-red-800">Erro no cadastro</h3>
+                                    <h3 class="font-semibold text-red-800">Erro no envio</h3>
                                     <p class="text-red-700 text-sm mt-1" id="errorText">Por favor, tente novamente.</p>
                                 </div>
                             </div>
@@ -604,58 +878,16 @@
             </div>
         </section>
 
-        <!-- Seção Benefícios -->
-        <section id="beneficios" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        Por Que Participar do Lançamento?
-                    </h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Descubra os benefícios exclusivos para os primeiros cadastrados
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                    <div class="text-center p-6">
-                        <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-gem text-primary text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Acesso Prioritário</h3>
-                        <p class="text-gray-600">Seja um dos primeiros a testar e adquirir o produto com condições especiais.</p>
-                    </div>
-
-                    <div class="text-center p-6">
-                        <div class="w-16 h-16 bg-accent bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-percentage text-accent text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Condições Exclusivas</h3>
-                        <p class="text-gray-600">Descontos e benefícios disponíveis apenas para cadastrados no pré-lançamento.</p>
-                    </div>
-
-                    <div class="text-center p-6">
-                        <div class="w-16 h-16 bg-green-500 bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-headset text-green-500 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Suporte Dedicado</h3>
-                        <p class="text-gray-600">Atendimento personalizado durante todo o processo de implementação.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Sobre com Vídeo -->
-        <section id="sobre" class="py-16 bg-gray-50">
+        <!-- Seção Vídeo -->
+        <section class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            Sobre o ProdutoPro
+                            Veja Nossa Solução em Ação
                         </h2>
                         <p class="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-                            Uma solução inovadora desenvolvida para revolucionar o mercado, 
-                            oferecendo eficiência, praticidade e resultados excepcionais para 
-                            empresas e profissionais.
+                            Conheça o Dashboard Têxtil e descubra como transformamos dados de produção em resultados tangíveis
                         </p>
                     </div>
 
@@ -664,7 +896,7 @@
                         <div class="video-thumbnail relative max-w-4xl mx-auto" onclick="openVideo()" id="videoThumbnail">
                             <img 
                                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-                                alt="Vídeo demonstrativo do ProdutoPro"
+                                alt="Vídeo demonstrativo do Dashboard Têxtil"
                                 class="w-full h-64 md:h-96 object-cover"
                             >
                             <div class="play-button">
@@ -674,27 +906,10 @@
                         <div id="videoPlayer" class="video-container hidden max-w-4xl mx-auto">
                             <iframe 
                                 src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                title="Vídeo demonstrativo do ProdutoPro" 
+                                title="Vídeo demonstrativo do Dashboard Têxtil" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen>
                             </iframe>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
-                        <div class="text-center">
-                            <div class="w-20 h-20 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-rocket text-primary text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Inovação</h3>
-                            <p class="text-gray-600">Tecnologia de ponta para resultados surpreendentes.</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-20 h-20 bg-accent bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-shield-alt text-accent text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Confiabilidade</h3>
-                            <p class="text-gray-600">Solução segura e estável para seu negócio.</p>
                         </div>
                     </div>
                 </div>
@@ -702,7 +917,7 @@
         </section>
     </main>
 
-    <!-- Barra de Redes Sociais - PARTE INFERIOR HORIZONTAL -->
+    <!-- Barra de Redes Sociais -->
     <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40">
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-3">
             <div class="flex space-x-3">
@@ -726,19 +941,10 @@
                 
                 <a href="#" class="group relative">
                     <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-700 shadow-md">
-                        <i class="fab fa-facebook-f text-white text-lg"></i>
+                        <i class="fab fa-linkedin text-white text-lg"></i>
                     </div>
                     <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                        Facebook
-                    </span>
-                </a>
-                
-                <a href="#" class="group relative">
-                    <div class="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md">
-                        <i class="fab fa-tiktok text-white text-lg"></i>
-                    </div>
-                    <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                        TikTok
+                        LinkedIn
                     </span>
                 </a>
             </div>
@@ -752,20 +958,22 @@
                 <div class="md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
                         <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                            <span class="text-primary font-bold text-lg">P</span>
+                            <i class="fas fa-industry text-primary"></i>
                         </div>
-                        <span class="text-xl font-bold">ProdutoPro</span>
+                        <span class="text-xl font-bold">Dashboard<span class="text-primary">Têxtil</span></span>
                     </div>
                     <p class="text-gray-400 max-w-md">
-                        Soluções inovadoras para empresas e consumidores. Estamos lançando em breve uma ferramenta que vai revolucionar o mercado.
+                        Solução especializada em monitoramento e análise de dados para teares Toyota. 
+                        Transforme dados de produção em insights acionáveis para otimizar sua operação têxtil.
                     </p>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Contato</h3>
                     <div class="space-y-2 text-gray-400">
-                        <p><i class="fas fa-envelope mr-2"></i>contato@produtopro.com</p>
-                        <p><i class="fas fa-phone mr-2"></i>(11) 9999-9999</p>
+                        <p><i class="fas fa-envelope mr-2"></i>hello@dashboardtextil.com.br</p>
+                        <p><i class="fas fa-phone mr-2"></i>(19) 9 9455-9836</p>
+                        <p><i class="fas fa-globe mr-2"></i>dashboardtextil.com.br</p>
                     </div>
                 </div>
 
@@ -786,7 +994,7 @@
             </div>
 
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 ProdutoPro. Todos os direitos reservados.</p>
+                <p>&copy; 2024 Dashboard Têxtil. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -800,8 +1008,8 @@
         <input type="text" name="entry.633004380" id="hiddenNome">
         <input type="text" name="entry.1279638903" id="hiddenCelular">
         <input type="text" name="entry.825415367" id="hiddenEmail">
-        <input type="text" name="entry.1909945442" id="hiddenCidade">
-        <input type="text" name="entry.1351631334" id="hiddenEmpresa">
+        <input type="text" name="entry.1909945442" id="hiddenEmpresa">
+        <input type="text" name="entry.1351631334" id="hiddenTeares">
         <input type="text" name="entry.411931879" id="hiddenMensagem">
         <input type="text" name="entry.1085065584" id="hiddenPrompt">
     </form>
@@ -839,24 +1047,22 @@
 
         function startReading() {
             const textToRead = `
-                Lançamento Exclusivo em Breve.
-                Seja um dos primeiros a conhecer nossa solução inovadora. 
-                Cadastre-se para receber informações privilegiadas, ofertas especiais 
-                e ser notificado sobre o lançamento.
-                Benefícios: Primeiro acesso e Condições especiais.
+                Dashboard Têxtil - Monitoramento Inteligente para Teares Toyota.
+                Solução completa de captura e análise de dados em tempo real. 
+                Aumente a eficiência da sua produção têxtil com Business Intelligence especializado.
                 
-                Conheça Nosso Produto: Design Moderno, Alta Performance, Tecnologia Avançada.
+                Funcionalidades: Monitoramento em Tempo Real, Business Intelligence, Acesso Multi-Dispositivo.
+                
+                Benefícios: Aumento de 15-30% na Eficiência, Redução de 20-40% em Paradas, 
+                Otimização de Custos, Decisão Baseada em Dados.
+                
+                Sistema de Monitoramento e B.I - Smart Analytics.
+                Integração nativa com TMS Toyota, captura automática sem hardware adicional,
+                dashboards em tempo real multi-dispositivo.
                 
                 Não Fique de Fora Desta Oportunidade.
-                Garanta seu lugar entre os primeiros a experimentar nossa solução revolucionária.
-                Benefícios: Acesso antecipado ao produto, Descontos especiais de lançamento, Suporte prioritário.
-                
-                Por Que Participar do Lançamento?
-                Acesso Prioritário: Seja um dos primeiros a testar e adquirir o produto com condições especiais.
-                Condições Exclusivas: Descontos e benefícios disponíveis apenas para cadastrados no pré-lançamento.
-                Suporte Dedicado: Atendimento personalizado durante todo o processo de implementação.
-                
-                Sobre o ProdutoPro: Uma solução inovadora desenvolvida para revolucionar o mercado.
+                Solicite uma demonstração gratuita e descubra como nossa solução pode aumentar 
+                a eficiência da sua operação em até 30%.
             `;
 
             if ('speechSynthesis' in window) {
@@ -1029,21 +1235,21 @@
                 return;
             }
             
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Cadastrando...';
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
             submitButton.disabled = true;
             submitButton.classList.add('opacity-75', 'cursor-not-allowed', 'loading');
 
             const formData = {
                 nome: document.getElementById('nome').value.trim(),
+                empresa: document.getElementById('empresa').value.trim(),
                 celular: document.getElementById('celular').value.trim(),
                 email: document.getElementById('email').value.trim(),
-                cidade: document.getElementById('cidade').value.trim(),
-                empresa: document.getElementById('empresa').value.trim(),
+                teares: document.getElementById('teares').value.trim(),
                 mensagem: document.getElementById('mensagem').value.trim()
             };
 
             // Validações
-            if (!formData.nome || !formData.celular || !formData.email || !formData.cidade || !formData.mensagem) {
+            if (!formData.nome || !formData.empresa || !formData.celular || !formData.email || !formData.teares || !formData.mensagem) {
                 showError('Por favor, preencha todos os campos obrigatórios.');
                 resetButton(submitButton, originalText);
                 return;
@@ -1072,10 +1278,10 @@
 
             // Preencher formulário oculto do Google
             document.getElementById('hiddenNome').value = formData.nome;
+            document.getElementById('hiddenEmpresa').value = formData.empresa;
             document.getElementById('hiddenCelular').value = formData.celular;
             document.getElementById('hiddenEmail').value = formData.email;
-            document.getElementById('hiddenCidade').value = formData.cidade;
-            document.getElementById('hiddenEmpresa').value = formData.empresa;
+            document.getElementById('hiddenTeares').value = formData.teares;
             document.getElementById('hiddenMensagem').value = formData.mensagem;
             document.getElementById('hiddenPrompt').value = promptContent;
 
@@ -1089,7 +1295,7 @@
                     document.getElementById('leadForm').reset();
                     resetButton(submitButton, originalText);
                     
-                    formStatus.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+                    formStatus.textContent = 'Solicitação enviada com sucesso! Em breve entraremos em contato para agendar a demonstração.';
                     
                     document.getElementById('successMessage').scrollIntoView({ 
                         behavior: 'smooth',

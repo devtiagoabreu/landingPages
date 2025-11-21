@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Têxtil - Monitoramento Inteligente para Teares Toyota</title>
+    <meta name="description" content="Solução completa de captura e análise de dados para teares Toyota. Aumente a eficiência da sua produção têxtil com monitoramento em tempo real e Business Intelligence.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .dashboard-preview {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .dashboard-preview:hover {
+            transform: perspective(1000px) rotateX(0) rotateY(0);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: #e5e7eb;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="navbar fixed top-0 left-0 right-0 z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <span>Dashboard<span class="text-blue-600">Têxtil</span></span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#solucao" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">Solução</a>
+                    <a href="#funcionalidades" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">Funcionalidades</a>
+                    <a href="#beneficios" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">Benefícios</a>
+                    <a href="#contato" class="font-medium text-gray-700 hover:text-blue-600 transition-colors">Contato</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#contato" class="btn-secondary hidden md:inline-block">Solicitar Demonstração</a>
+                    <button class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero pt-32 pb-20 md:pt-40 md:pb-32">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                        Monitoramento Inteligente para <span class="text-yellow-300">Teares Toyota</span>
+                    </h1>
+                    <p class="text-xl text-blue-100 mb-8 max-w-2xl">
+                        Solução completa de captura e análise de dados em tempo real. 
+                        Aumente a eficiência da sua produção têxtil com Business Intelligence especializado.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contato" class="btn-primary">
+                            <i class="fas fa-calendar-check mr-2"></i>
+                            Agendar Demonstração
+                        </a>
+                        <a href="#solucao" class="btn-secondary border-white text-white hover:bg-white hover:text-blue-700">
+                            <i class="fas fa-play-circle mr-2"></i>
+                            Conhecer a Solução
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="fade-in delay-1">
+                    <div class="dashboard-preview p-2 bg-gray-800 rounded-lg">
+                        <div class="bg-gray-900 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="text-white font-semibold">Painel de Controle - Teares Toyota</div>
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-800 rounded p-4 mb-4">
+                                <div class="grid grid-cols-3 gap-4 text-center text-white mb-4">
+                                    <div class="bg-gray-700 rounded p-2">
+                                        <div class="text-sm text-gray-300">RPM Médio</div>
+                                        <div class="text-xl font-bold text-green-400">645</div>
+                                    </div>
+                                    <div class="bg-gray-700 rounded p-2">
+                                        <div class="text-sm text-gray-300">Eficiência</div>
+                                        <div class="text-xl font-bold text-yellow-400">79%</div>
+                                    </div>
+                                    <div class="bg-gray-700 rounded p-2">
+                                        <div class="text-sm text-gray-300">Metros/Dia</div>
+                                        <div class="text-xl font-bold text-blue-400">12.024</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-700 rounded p-3">
+                                    <div class="text-white text-sm font-semibold mb-2">Status dos Teares</div>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300">Tear 00001</span>
+                                            <span class="text-green-400 flex items-center">
+                                                <i class="fas fa-circle text-xs mr-1"></i> 94.8%
+                                            </span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300">Tear 00002</span>
+                                            <span class="text-green-400 flex items-center">
+                                                <i class="fas fa-circle text-xs mr-1"></i> 87.9%
+                                            </span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-gray-300">Tear 00003</span>
+                                            <span class="text-yellow-400 flex items-center">
+                                                <i class="fas fa-circle text-xs mr-1"></i> 69.4%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card p-6 text-center fade-in">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">+30%</div>
+                    <div class="text-gray-600">Aumento de Eficiência</div>
+                </div>
+                <div class="stat-card p-6 text-center fade-in delay-1">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">-25%</div>
+                    <div class="text-gray-600">Redução de Paradas</div>
+                </div>
+                <div class="stat-card p-6 text-center fade-in delay-2">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">99.9%</div>
+                    <div class="text-gray-600">Disponibilidade do Sistema</div>
+                </div>
+                <div class="stat-card p-6 text-center fade-in delay-3">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">0</div>
+                    <div class="text-gray-600">Hardware Adicional</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solucao" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Solução Completa para o Setor Têxtil</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
+                    Integração nativa com software TMS Toyota para captura automática de dados e análise em tempo real
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                        Sistema de Monitoramento e B.I - <span class="text-blue-600">Smart Analytics</span>
+                    </h3>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Nossa solução captura dados diretamente dos teares Toyota através de integração nativa com o sistema TMS, 
+                        sem necessidade de hardware adicional. Transforme dados brutos em insights acionáveis para otimizar sua produção.
+                    </p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-bolt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Implementação Rápida</h4>
+                                <p class="text-gray-600">Integração em poucos dias, sem interromper a produção</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-shield-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Segurança de Dados</h4>
+                                <p class="text-gray-600">Seus dados de produção protegidos com criptografia de ponta</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4 mt-1">
+                                <i class="fas fa-mobile-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Acesso Multiplataforma</h4>
+                                <p class="text-gray-600">Acompanhe sua produção de qualquer dispositivo, a qualquer hora</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contato" class="btn-primary inline-flex items-center">
+                        Solicitar Proposta Personalizada
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="fade-in delay-1">
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-cogs text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-lg">Requisitos Técnicos</h4>
+                                <p class="text-gray-600">Compatibilidade com sua infraestrutura atual</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                                <span class="font-medium text-gray-700">Sistema TMS Toyota</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Obrigatório</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                                <span class="font-medium text-gray-700">Teares com Placa de Rede</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Obrigatório</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                                <span class="font-medium text-gray-700">Conexão com Internet</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Obrigatório</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                                <span class="font-medium text-gray-700">Hardware Adicional</span>
+                                <span class="bg-gray-200 text-gray-600 px-2 py-1 rounded text-sm font-medium">Não Necessário</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                            <div class="flex">
+                                <i class="fas fa-info-circle text-yellow-500 mr-3 mt-1"></i>
+                                <p class="text-yellow-800 text-sm">
+                                    <strong>Importante:</strong> Nossa solução utiliza API para integração direta com o sistema TMS da Toyota, 
+                                    sem necessidade de sensores ou hardware adicional.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="funcionalidades" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Funcionalidades Principais</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
+                    Tudo que você precisa para monitorar e otimizar sua produção têxtil em um só lugar
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card p-6 fade-in">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-tachometer-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Monitoramento em Tempo Real</h3>
+                    <p class="text-gray-600 mb-4">
+                        Acompanhe RPM, eficiência, status e produção de todos os teares simultaneamente.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Dados atualizados a cada 5 segundos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Alertas de paradas e baixa eficiência</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Status por cor (verde, amarelo, vermelho)</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card p-6 fade-in delay-1">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Business Intelligence</h3>
+                    <p class="text-gray-600 mb-4">
+                        Análises profundas com dashboards interativos para tomada de decisão estratégica.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Comparação de desempenho entre teares</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Análise de eficiência por turno e operador</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Previsões de produção baseadas em histórico</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card p-6 fade-in delay-2">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Acesso Multi-Dispositivo</h3>
+                    <p class="text-gray-600 mb-4">
+                        Painéis responsivos acessíveis de computadores, TVs e smartphones.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Interface adaptada para cada tipo de tela</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Acesso remoto de qualquer lugar</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>TV Dashboard para salas de controle</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card p-6 fade-in">
+                    <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Gestão de Paradas</h3>
+                    <p class="text-gray-600 mb-4">
+                        Identifique e categorize as causas de paradas para reduzir tempo ocioso.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Paradas de trama e urdume</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Paradas operacionais e manutenção</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Relatórios de MTBF e MTTR</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card p-6 fade-in delay-1">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-clipboard-list text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Relatórios Customizáveis</h3>
+                    <p class="text-gray-600 mb-4">
+                        Gere relatórios detalhados com os indicadores mais importantes para sua operação.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Produção por tear, turno e artigo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Eficiência geral e por máquina</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Exportação em PDF, Excel e CSV</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card p-6 fade-in delay-2">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-history text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Histórico Completo</h3>
+                    <p class="text-gray-600 mb-4">
+                        Banco de dados com todo histórico de produção para análises comparativas.
+                    </p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Armazenamento ilimitado de dados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Comparação com períodos anteriores</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                            <span>Tendências e sazonalidades</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Benefícios Tangíveis</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
+                    Resultados mensuráveis que impactam diretamente no seu faturamento
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Retorno sobre Investimento Comprovado</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-chart-bar text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">Aumento de 15-30% na Eficiência</h4>
+                                    <p class="text-gray-600 mt-1">
+                                        Identificação e correção de gargalos em tempo real resulta em maior produtividade
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-clock text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">Redução de 20-40% em Paradas</h4>
+                                    <p class="text-gray-600 mt-1">
+                                        Alertas proativos e análise de causas raiz diminuem significativamente o tempo ocioso
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-search-dollar text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">Otimização de Custos</h4>
+                                    <p class="text-gray-600 mt-1">
+                                        Melhor aproveitamento de matéria-prima, energia e mão de obra
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-bullseye text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg">Tomada de Decisão Baseada em Dados</h4>
+                                    <p class="text-gray-600 mt-1">
+                                        Dashboards intuitivos fornecem insights para decisões estratégicas mais assertivas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in delay-1">
+                    <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-6">Case de Sucesso</h3>
+                        <div class="flex items-start mb-6">
+                            <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Têxtil Nacional - 34 Teares Toyota</h4>
+                                <p class="text-blue-100 mt-1">Implementação: Março 2023</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-white bg-opacity-10 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">+28%</div>
+                                <div class="text-sm text-blue-100">Eficiência</div>
+                            </div>
+                            <div class="bg-white bg-opacity-10 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">-32%</div>
+                                <div class="text-sm text-blue-100">Paradas</div>
+                            </div>
+                            <div class="bg-white bg-opacity-10 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">6 meses</div>
+                                <div class="text-sm text-blue-100">ROI</div>
+                            </div>
+                            <div class="bg-white bg-opacity-10 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">99.7%</div>
+                                <div class="text-sm text-blue-100">Disponibilidade</div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20">
+                            <p class="italic mb-4">
+                                "O Dashboard Têxtil transformou nossa forma de gerenciar a produção. 
+                                Antes tomávamos decisões baseadas em percepção, hoje temos dados concretos 
+                                que nos permitem otimizar continuamente nossos processos."
+                            </p>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Carlos Mendes</div>
+                                    <div class="text-blue-200 text-sm">Gerente de Produção</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 fade-in">
+                Pronto para Transformar sua Produção Têxtil?
+            </h2>
+            <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-8 fade-in delay-1">
+                Agende uma demonstração gratuita e descubra como nossa solução pode aumentar 
+                a eficiência da sua operação em até 30%
+            </p>
+            <a href="#contato" class="btn-primary bg-white text-blue-700 hover:bg-blue-50 inline-flex items-center fade-in delay-2">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                Agendar Demonstração
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900">Entre em Contato</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
+                    Solicite uma proposta personalizada ou agende uma demonstração sem compromisso
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Informações de Contato</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Email</h4>
+                                <a href="mailto:hello@dashboardtextil.com.br" class="text-blue-600 hover:text-blue-800">
+                                    hello@dashboardtextil.com.br
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Telefone</h4>
+                                <a href="tel:+5519994559836" class="text-blue-600 hover:text-blue-800">
+                                    (19) 9 9455-9836
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-globe text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Website</h4>
+                                <a href="https://dashboardtextil.com.br" class="text-blue-600 hover:text-blue-800">
+                                    dashboardtextil.com.br
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-user-tie text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Responsável Técnico</h4>
+                                <p class="text-gray-600">Tiago de Abreu - CTO Dashboard Têxtil</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-6 bg-gray-50 rounded-2xl">
+                        <h4 class="font-bold text-gray-900 mb-3">Próximos Passos</h4>
+                        <ol class="text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-1">1</span>
+                                <span>Entendemos suas necessidades específicas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-1">2</span>
+                                <span>Apresentamos a solução em demonstração online</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-1">3</span>
+                                <span>Elaboramos proposta comercial personalizada</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-1">4</span>
+                                <span>Implementação e treinamento da equipe</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="fade-in delay-1">
+                    <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Solicitar Demonstração</h3>
+                        
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+                                <input type="text" id="nome" name="nome" required class="form-input" placeholder="Seu nome completo">
+                            </div>
+                            
+                            <div>
+                                <label for="empresa" class="block text-sm font-medium text-gray-700 mb-2">Empresa *</label>
+                                <input type="text" id="empresa" name="empresa" required class="form-input" placeholder="Nome da sua empresa">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                <input type="email" id="email" name="email" required class="form-input" placeholder="seu@email.com">
+                            </div>
+                            
+                            <div>
+                                <label for="telefone" class="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
+                                <input type="tel" id="telefone" name="telefone" required class="form-input" placeholder="(11) 99999-9999">
+                            </div>
+                            
+                            <div>
+                                <label for="teares" class="block text-sm font-medium text-gray-700 mb-2">Quantidade de Teares Toyota *</label>
+                                <select id="teares" name="teares" required class="form-input">
+                                    <option value="">Selecione...</option>
+                                    <option value="1-5">1-5 teares</option>
+                                    <option value="6-15">6-15 teares</option>
+                                    <option value="16-30">16-30 teares</option>
+                                    <option value="31-50">31-50 teares</option>
+                                    <option value="51+">Mais de 50 teares</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+                                <textarea id="mensagem" name="mensagem" rows="4" class="form-input" placeholder="Conte-nos sobre seus objetivos e desafios..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Enviar Solicitação
+                            </button>
+                            
+                            <p class="text-xs text-gray-500 text-center">
+                                Ao enviar este formulário, você concorda em receber comunicações sobre nossa solução.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="logo flex items-center mb-4">
+                        <div class="logo-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <span class="text-white">Dashboard<span class="text-blue-400">Têxtil</span></span>
+                    </div>
+                    <p class="text-gray-300 max-w-md mb-6">
+                        Solução especializada em monitoramento e análise de dados para teares Toyota. 
+                        Transforme dados de produção em insights acionáveis para otimizar sua operação têxtil.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#solucao" class="text-gray-300 hover:text-white transition-colors">Solução</a></li>
+                        <li><a href="#funcionalidades" class="text-gray-300 hover:text-white transition-colors">Funcionalidades</a></li>
+                        <li><a href="#beneficios" class="text-gray-300 hover:text-white transition-colors">Benefícios</a></li>
+                        <li><a href="#contato" class="text-gray-300 hover:text-white transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contato</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mr-2 mt-1"></i>
+                            <a href="mailto:hello@dashboardtextil.com.br" class="hover:text-white transition-colors">
+                                hello@dashboardtextil.com.br
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mr-2 mt-1"></i>
+                            <a href="tel:+5519994559836" class="hover:text-white transition-colors">
+                                (19) 9 9455-9836
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe mr-2 mt-1"></i>
+                            <a href="https://dashboardtextil.com.br" class="hover:text-white transition-colors">
+                                dashboardtextil.com.br
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Dashboard Têxtil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, you would send the form data to your server
+            alert('Obrigado pelo seu interesse! Entraremos em contato em breve para agendar a demonstração.');
+            this.reset();
+        });
+        
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+            
+            // Set initial state
+            fadeElements.forEach(element => {
+                element.style.opacity = "0";
+                element.style.transform = "translateY(20px)";
+                element.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            });
+            
+            // Check on load
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+        });
+    </script>
+</body>
+</html>
