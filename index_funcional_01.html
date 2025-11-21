@@ -31,6 +31,7 @@
         }
     </script>
     <style>
+        /* Header fixo */
         header {
             position: fixed;
             top: 0;
@@ -39,10 +40,12 @@
             z-index: 1000;
         }
         
+        /* Compensar header fixo */
         main {
             padding-top: 80px;
         }
         
+        /* Carrossel */
         .carousel-container {
             position: relative;
             overflow: hidden;
@@ -72,6 +75,7 @@
             transform: scale(1.02);
         }
         
+        /* Modal */
         .image-modal {
             position: fixed;
             top: 0;
@@ -120,6 +124,7 @@
             transform: rotate(90deg);
         }
         
+        /* Botão voltar ao topo */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -150,6 +155,7 @@
             color: white;
         }
         
+        /* Acessibilidade */
         .font-small { font-size: 14px; }
         .font-normal { font-size: 16px; }
         .font-large { font-size: 18px; }
@@ -172,6 +178,7 @@
             transform: scale(1.1);
         }
 
+        /* Loading animation */
         .loading {
             position: relative;
             pointer-events: none;
@@ -193,6 +200,7 @@
             100% { left: 100%; }
         }
 
+        /* Screen reader only */
         .sr-only {
             position: absolute;
             width: 1px;
@@ -205,6 +213,7 @@
             border: 0;
         }
 
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -708,22 +717,21 @@
         </div>
     </footer>
 
-    <!-- Formulário invisível para Google Forms - CORRIGIDO -->
+    <!-- Formulário invisível para Google Forms -->
     <form id="hiddenForm" 
-          action="https://docs.google.com/forms/d/e/1FAIpQLSe3mjBLJj90z77mjYBMRpZfWlC-gQuqJ8TUnBvGdV5Nm28IhQ/formResponse" 
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe3mjBLJj90z77mjYBMRpZfWlC-gQuqJ8TUnBvGdV5Nm28IhQ/formResponse" 
           method="POST" 
           target="hiddenIframe"
-          style="display: none;">
-        <!-- SEUS IDs CORRETOS AQUI -->
+          class="hidden">
         <input type="text" name="entry.633004380" id="hiddenNome">
         <input type="text" name="entry.1279638903" id="hiddenCelular">
         <input type="text" name="entry.825415367" id="hiddenEmail">
         <input type="text" name="entry.1909945442" id="hiddenCidade">
         <input type="text" name="entry.1351631334" id="hiddenEmpresa">
         <input type="text" name="entry.411931879" id="hiddenMensagem">
-        <input type="text" name="entry.1085065584" id="hiddenPrompt">
+        <input type="text" name="entry.1085065584" id="hiddenPrompt"> <!-- Campo para o prompt -->
     </form>
-    <iframe name="hiddenIframe" style="display: none;"></iframe>
+    <iframe name="hiddenIframe" class="hidden"></iframe>
 
     <!-- Status para screen readers -->
     <div id="formStatus" class="sr-only" aria-live="polite" aria-atomic="true"></div>
@@ -740,10 +748,10 @@
                     throw new Error('Arquivo prompt.txt não encontrado');
                 }
                 promptContent = await response.text();
-                console.log('Prompt carregado com sucesso');
+                console.log('Prompt carregado com sucesso:', promptContent);
             } catch (error) {
                 console.error('Erro ao carregar prompt.txt:', error);
-                promptContent = 'Prompt não carregado - ' + error.message;
+                promptContent = 'Prompt não carregado';
             }
         }
 
@@ -757,6 +765,7 @@
         function updateCarousel() {
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
             
+            // Atualizar indicadores
             indicators.forEach((indicator, index) => {
                 if (index === currentSlide) {
                     indicator.classList.add('bg-white');
@@ -810,6 +819,7 @@
             startCarousel();
         }
 
+        // Fechar modal com ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeModal();
@@ -823,8 +833,27 @@
         }
 
         function readAloud() {
-            const textToRead = `Lançamento Exclusivo em Breve. Seja um dos primeiros a conhecer nossa solução inovadora. Cadastre-se para receber informações privilegiadas, ofertas especiais e ser notificado sobre o lançamento.`;
-            
+            const textToRead = `
+                Lançamento Exclusivo em Breve.
+                Seja um dos primeiros a conhecer nossa solução inovadora. 
+                Cadastre-se para receber informações privilegiadas, ofertas especiais 
+                e ser notificado sobre o lançamento.
+                Benefícios: Primeiro acesso e Condições especiais.
+                
+                Conheça Nosso Produto: Design Moderno, Alta Performance, Tecnologia Avançada.
+                
+                Não Fique de Fora Desta Oportunidade.
+                Garanta seu lugar entre os primeiros a experimentar nossa solução revolucionária.
+                Benefícios: Acesso antecipado ao produto, Descontos especiais de lançamento, Suporte prioritário.
+                
+                Por Que Participar do Lançamento?
+                Acesso Prioritário: Seja um dos primeiros a testar e adquirir o produto com condições especiais.
+                Condições Exclusivas: Descontos e benefícios disponíveis apenas para cadastrados no pré-lançamento.
+                Suporte Dedicado: Atendimento personalizado durante todo o processo de implementação.
+                
+                Sobre o ProdutoPro: Uma solução inovadora desenvolvida para revolucionar o mercado.
+            `;
+
             if ('speechSynthesis' in window) {
                 const speech = new SpeechSynthesisUtterance();
                 speech.text = textToRead;
@@ -834,11 +863,14 @@
                 speech.volume = 1;
                 
                 window.speechSynthesis.speak(speech);
+            } else {
+                alert('Seu navegador não suporta síntese de voz. Tente usar Chrome, Edge ou Safari.');
             }
         }
 
         // ===== BOTÃO VOLTAR AO TOPO =====
         const backToTop = document.getElementById('backToTop');
+
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
                 backToTop.classList.add('visible');
@@ -848,7 +880,10 @@
         });
 
         backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // ===== VALIDAÇÕES =====
@@ -862,7 +897,7 @@
             return cleaned.length === 11;
         }
 
-        // ===== FORMULÁRIO - CORRIGIDO =====
+        // ===== FORMULÁRIO =====
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -889,7 +924,8 @@
                 email: document.getElementById('email').value.trim(),
                 cidade: document.getElementById('cidade').value.trim(),
                 empresa: document.getElementById('empresa').value.trim(),
-                mensagem: document.getElementById('mensagem').value.trim()
+                mensagem: document.getElementById('mensagem').value.trim(),
+                prompt: promptContent // Adiciona o conteúdo do prompt
             };
 
             // Validações
@@ -915,10 +951,15 @@
             if (!promptContent) {
                 try {
                     await loadPrompt();
+                    formData.prompt = promptContent;
                 } catch (error) {
                     console.error('Erro ao carregar prompt:', error);
+                    formData.prompt = 'Erro ao carregar prompt';
                 }
             }
+
+            // Salvar dados temporariamente
+            localStorage.setItem('formBackup', JSON.stringify(formData));
 
             // Preencher formulário oculto do Google
             document.getElementById('hiddenNome').value = formData.nome;
@@ -927,33 +968,34 @@
             document.getElementById('hiddenCidade').value = formData.cidade;
             document.getElementById('hiddenEmpresa').value = formData.empresa;
             document.getElementById('hiddenMensagem').value = formData.mensagem;
-            document.getElementById('hiddenPrompt').value = promptContent;
+            document.getElementById('hiddenPrompt').value = formData.prompt; // Adiciona o prompt
 
             // Enviar formulário
-            try {
-                document.getElementById('hiddenForm').submit();
-                
-                // Sucesso
-                setTimeout(() => {
-                    document.getElementById('successMessage').classList.remove('hidden');
-                    document.getElementById('leadForm').reset();
-                    resetButton(submitButton, originalText);
-                    
-                    formStatus.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
-                    
-                    document.getElementById('successMessage').scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Erro ao enviar formulário:', error);
-                // Mesmo com erro, mostra sucesso para o usuário
+            document.getElementById('hiddenForm').submit();
+
+            // Simular delay de envio
+            setTimeout(() => {
                 document.getElementById('successMessage').classList.remove('hidden');
                 document.getElementById('leadForm').reset();
                 resetButton(submitButton, originalText);
-            }
+                localStorage.removeItem('formBackup');
+                
+                formStatus.textContent = 'Cadastro realizado com sucesso! Em breve entraremos em contato.';
+                
+                document.getElementById('successMessage').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // Track conversion
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-XXXXXXXXX/YYYYYYYYYYYY',
+                        'value': 1.0,
+                        'currency': 'BRL'
+                    });
+                }
+            }, 1000);
         });
 
         function showError(message) {
@@ -982,16 +1024,49 @@
             }
         });
 
-        // Inicialização
+        // Inicialização quando o DOM estiver carregado
         document.addEventListener('DOMContentLoaded', function() {
+            // Carregar prompt.txt automaticamente
             loadPrompt();
+
+            // Recarregar dados salvos em caso de erro anterior
+            const savedData = localStorage.getItem('formBackup');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                Object.keys(data).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) element.value = data[key];
+                });
+            }
+
+            // Iniciar carrossel automático
             startCarousel();
 
+            // Pausar no hover
             const carouselContainer = document.querySelector('.carousel-container');
-            if (carouselContainer) {
-                carouselContainer.addEventListener('mouseenter', stopCarousel);
-                carouselContainer.addEventListener('mouseleave', startCarousel);
-            }
+            carouselContainer.addEventListener('mouseenter', stopCarousel);
+            carouselContainer.addEventListener('mouseleave', startCarousel);
+
+            // Lazy loading para imagens (opcional)
+            const carouselImages = document.querySelectorAll('.carousel-image');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            imageObserver.unobserve(img);
+                        }
+                    }
+                });
+            });
+
+            carouselImages.forEach(img => {
+                // Salvar src original e substituir por placeholder
+                img.dataset.src = img.src;
+                img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSI1MDBweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+';
+                imageObserver.observe(img);
+            });
         });
 
         // Smooth scroll para links
